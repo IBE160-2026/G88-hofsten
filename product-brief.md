@@ -2,7 +2,7 @@
 title: "Product Brief: VoyageAI"
 status: final
 created: 2026-09-27
-updated: 2026-09-27
+updated: 2026-11-17
 ---
 
 # Product Brief: VoyageAI
@@ -36,9 +36,19 @@ In VoyageAI the planner:
 4. **Compares three scenarios**, calculated side by side:
    - keep planned speed and accept the delay
    - speed up to recover lost time
-   - slow down to arrive just in time for the next berth window
+   - slow down to arrive when the next berth window opens
 5. **Reads an AI explanation:** the AI summarises the differences, explains the trade-offs between time and cost, and describes operational considerations in words. It suggests which option looks most suitable on the simulated figures, and why. It also flags factors the prototype does not calculate as things to check, such as charter party speed terms, laytime and emissions. The AI has no contract data, so it cannot assess these factors.
 6. **Decides:** the planner chooses. VoyageAI does not act on the decision.
+
+**Simulated cost model and sample voyage:** The sample departs A 12 hours late, at 12:00 on 1 June. It compares A-B at 10, 12.5, or 100/11 knots; B-C stays at 10 knots. For the slow-down scenario, the next B window after the 10-knot ETA (4 June 00:00) opens at 06:00 that day. The two sample windows (3 and 4 June, 06:00-18:00) determine when the 12-hour stay starts: early arrivals wait; arrivals during a window start on arrival; arrivals at or after closing wait for the next listed window. The stay may finish later. Fuel cost = (sailing fuel + berth-wait fuel at B) × simulated USD 600/tonne. Inclusive 8-13-knot limits apply per sailing leg; out-of-range targets are infeasible, not clamped or considered to meet the window. Fuel during the departure delay and port stays, port fees, demurrage, and other commercial or contractual costs are excluded. All times and values are simulated; full inputs and calculations are in the [implementation spec](.docs/implementation-artifacts/spec-voyageai-cost-model.md).
+
+| Sample scenario | ETA B | Berth wait at B | ETA C | Total modelled fuel | Simulated fuel cost |
+|---|---|---:|---|---:|---:|
+| Keep A-B at 10 knots | 4 June 00:00 | 6 hours | 6 June 00:00 | 45.250 tonnes | USD 27,150.00 |
+| Increase A-B to 12.5 knots | 3 June 12:00 | 0 hours | 5 June 06:00 | 61.875 tonnes | USD 37,125.00 |
+| Reduce A-B to 100/11 knots (about 9.09 knots) | 4 June 06:00 | 0 hours | 6 June 00:00 | 39.793 tonnes | USD 23,876.03 |
+
+Displayed fuel values are rounded to three decimals and costs to cents for consistent comparison, not as real-world precision; costs use unrounded fuel calculations.
 
 ## Role of AI
 
@@ -61,7 +71,8 @@ The intended users are people who work with voyage planning or maritime operatio
 - One vessel and one voyage at a time, with roughly 3–5 port calls
 - One type of disruption: a delay at one port call
 - The three scenarios above, calculated by deterministic code
-- A simplified, transparent cost model based on simulated data, clearly labelled as simulated
+- A simplified, transparent fuel cost model for sailing and waiting, based on simulated data and excluding fuel during port stays
+- Simulated speed limits of 8-13 knots
 - An AI explanation and suggestion based on the calculated scenarios
 - A web dashboard showing the voyage, the impact and the scenario comparison
 
@@ -77,7 +88,7 @@ The intended users are people who work with voyage planning or maritime operatio
 ## Success Criteria
 
 1. **Working demo:** using a sample voyage, a user can go from a delayed port call to three compared scenarios and an AI explanation in one flow on the dashboard.
-2. **Consistent figures:** the scenario figures follow from the stated simulated inputs and formulas. A hand check on the sample voyages confirms this, and confirms that the AI explanation neither contradicts the figures nor adds numbers of its own.
+2. **Consistent figures:** the scenario figures follow from the stated simulated inputs and formulas. A hand check of the A -> B -> C sample confirms ETAs, waiting times, fuel use and fuel costs for all three scenarios, and verifies that reported scenario speeds are within the inclusive 8-13-knot limits. It also confirms that the AI explanation neither contradicts the figures nor adds numbers of its own.
 3. **Clear division of roles:** the code calculates, the AI explains, and the user decides, and this is visible in the prototype.
 4. **AI-assisted development:** the prototype is built using AI-assisted and agentic development, and this use is documented along the way.
 5. **Honest basis:** assumptions and simplifications are stated openly, and nothing is presented as validated.
@@ -96,5 +107,4 @@ The intended users are people who work with voyage planning or maritime operatio
 **Open questions:**
 
 - How do planners actually handle delays today?
-- Which cost elements should the model include (for example fuel, waiting time, port costs)?
 - Should operational risk get a simple calculated indicator, or stay as a description in the AI explanation?
