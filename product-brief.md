@@ -37,7 +37,7 @@ In VoyageAI the planner:
    - keep planned speed and accept the delay
    - speed up to recover lost time
    - slow down to arrive when the next berth window opens
-5. **Reads an AI explanation:** the AI summarises the differences, explains the trade-offs between time and cost, and describes operational considerations in words. It suggests which option looks most suitable on the simulated figures, and why. It also flags factors the prototype does not calculate as things to check, such as charter party speed terms, laytime and emissions. The AI has no contract data, so it cannot assess these factors.
+5. **Reads an explanation:** when an AI key is available, the AI summarises the differences, explains the trade-offs between time and cost, and describes operational considerations in words. It suggests which option looks most suitable on the simulated figures, and why. It also flags factors the prototype does not calculate as things to check, such as charter party speed terms, laytime and emissions. The AI has no contract data, so it cannot assess these factors. All scenario calculations work without an AI key; for the sample voyage, VoyageAI shows a clearly labelled predefined mock explanation instead of a live AI response. The planner can still compare the scenarios and make the final decision.
 6. **Decides:** the planner chooses. VoyageAI does not act on the decision.
 
 **Simulated cost model and sample voyage:** The sample departs A 12 hours late, at 12:00 on 1 June. It compares A-B at 10, 12.5, or 100/11 knots; B-C stays at 10 knots. For the slow-down scenario, the next B window after the 10-knot ETA (4 June 00:00) opens at 06:00 that day. The two sample windows (3 and 4 June, 06:00-18:00) determine when the 12-hour stay starts: early arrivals wait; arrivals during a window start on arrival; arrivals at or after closing wait for the next listed window. The stay may finish later. Fuel cost = (sailing fuel + berth-wait fuel at B) × simulated USD 600/tonne. Inclusive 8-13-knot limits apply per sailing leg; out-of-range targets are infeasible, not clamped or considered to meet the window. Fuel during the departure delay and port stays, port fees, demurrage, and other commercial or contractual costs are excluded. All times and values are simulated; full inputs and calculations are in the [implementation spec](.docs/implementation-artifacts/spec-voyageai-cost-model.md).
@@ -60,9 +60,13 @@ Displayed fuel values are rounded to three decimals and costs to cents for consi
 
 The AI only uses figures calculated by the code and must not introduce numbers of its own.
 
+## What Makes This Different
+
+VoyageAI brings three responses to a port delay together with a plain-language explanation, rather than leaving the planner to assemble the comparison in a spreadsheet. It is a small simulated prototype, not a replacement for commercial planning tools or their operational data.
+
 ## Intended Users
 
-The intended users are people who work with voyage planning or maritime operations at a shipping company. Their needs as described in this brief are assumptions from domain literature and have not been confirmed with users.
+The primary user is a voyage planner or operator at a smaller shipping company who needs to assess how a reported delay affects the rest of a voyage and compare possible responses. This user description and their needs are assumptions from domain literature and have not been confirmed with users.
 
 ## Version 1 Scope
 
@@ -73,7 +77,7 @@ The intended users are people who work with voyage planning or maritime operatio
 - The three scenarios above, calculated by deterministic code
 - A simplified, transparent fuel cost model for sailing and waiting, based on simulated data and excluding fuel during port stays
 - Simulated speed limits of 8-13 knots
-- An AI explanation and suggestion based on the calculated scenarios
+- An AI explanation and suggestion based on the calculated scenarios, with a predefined mock explanation for the sample voyage when no AI key is available
 - A web dashboard showing the voyage, the impact and the scenario comparison
 
 **Out of scope:**
@@ -85,9 +89,13 @@ The intended users are people who work with voyage planning or maritime operatio
 - Legally precise laytime or demurrage calculations
 - User accounts and production operation
 
+## Vision
+
+Beyond V1, VoyageAI could explore additional disruption types or multiple vessels while keeping the planner in control.
+
 ## Success Criteria
 
-1. **Working demo:** using a sample voyage, a user can go from a delayed port call to three compared scenarios and an AI explanation in one flow on the dashboard.
+1. **Working demo:** using a sample voyage without an AI key, a user can go from a delayed port call to three compared scenarios and a clearly labelled predefined mock explanation in one flow on the dashboard.
 2. **Consistent figures:** the scenario figures follow from the stated simulated inputs and formulas. A hand check of the A -> B -> C sample confirms ETAs, waiting times, fuel use and fuel costs for all three scenarios, and verifies that reported scenario speeds are within the inclusive 8-13-knot limits. It also confirms that the AI explanation neither contradicts the figures nor adds numbers of its own.
 3. **Clear division of roles:** the code calculates, the AI explains, and the user decides, and this is visible in the prototype.
 4. **AI-assisted development:** the prototype is built using AI-assisted and agentic development, and this use is documented along the way.
@@ -101,7 +109,7 @@ The intended users are people who work with voyage planning or maritime operatio
 - A delay at a port call is a common and meaningful problem for voyage planners.
 - Planners would find a side-by-side comparison with an explanation useful.
 - A simplified cost model can illustrate the trade-offs clearly, although the simulated figures are not intended to represent actual commercial voyage costs.
-- Speed and fuel relationships and port data can be simulated plausibly from public sources (see `addendum.md`).
+- The sample's speed, fuel and port values are illustrative simulated assumptions, not verified market data. The research context and potential data sources are recorded in the [addendum](.docs/planning-artifacts/briefs/brief-VoyageAI-2026-09-27/addendum.md).
 - No external validation is planned, so the prototype demonstrates a concept, not proven user value.
 
 **Open questions:**
