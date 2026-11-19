@@ -1,1 +1,9 @@
 # Åpne punkter
+
+- [x] 2026-11-18 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — avklar regler for å utlede scenariofart for andre enn den godkjente prøvereisen. (løst 2026-11-19: andre reiser er utenfor V1.)
+- [x] 2026-11-18 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — avklar obligatoriske inputfelt og validering for ikke-prøvereiser. (løst 2026-11-19: brukeropprettede reiser er utenfor V1.)
+- [x] 2026-11-18 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — avklar fallback når AI-tjenesten ikke er tilgjengelig for andre reiser enn prøvereisen. (løst 2026-11-19: eneste V1-reise og fallback er spesifisert.)
+- [x] 2026-11-18 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — avklar hvor mange prøve-reiser V1 skal inneholde; Briefen sier flere, spesifikasjonen håndkontrollerer én. (løst 2026-11-19: bare godkjent A–B–C-sample inngår i V1.)
+- [x] 2026-11-18 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — ta stilling til om brukerbehovet skal valideres utover desk research; ikke framstill den hypotetiske reisen som validert. (løst 2026-11-19: behovet forblir uvalidert; ingen ekstern validering planlegges for prototypen.)
+- [x] 2026-11-18 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — avklar om SM-4 får en observerbar beståttgrense eller flyttes til prosjektbegrensninger. (løst 2026-11-19: flyttet til prosjektbegrensninger.)
+- [ ] 2026-11-19 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — ta stilling til om AI-forslag med begrunnelse og AI-assistert utvikling med dokumentasjon skal være PRD-krav.
