@@ -37,3 +37,19 @@ Independently review the named architecture stack and operations as of 2026-11-2
 
 ### Åpne punkter
 - Triage the stack and operations findings covering project pins/lockfile, local secrets and Flask session key assumptions, provider deadlines, and fallback presentation/current-delay tests.
+
+## 2026-11-20 kl. 13:19 — Victoria Hofsten
+
+### Oppgave
+Run the configured adversarial reviewer pass on the current VoyageAI architecture spine. Try to construct two compliant implementations that diverge on fixture/result ownership, units/precision, recommendation identity, AI/fallback, request history, labels, or tests. Do not edit the spine.
+
+### Plan
+- Compare the current spine with the earlier adversarial findings and the approved cost-model contract.
+- Attempt paired compliant implementations for each requested divergence dimension, then write the full pass to the requested review path.
+- Run the deterministic spine lint and keep the result limited to residual real divergence holes.
+
+### Resultat
+Created `reviews/review-final-adversarial.md`. No residual real divergence holes were found: each tested pair is ruled out by the current ownership, result, precision, recommendation, provider/fallback, request-history, label, and verification contracts. The spine lint passed with zero findings, the review whitespace check passed, and the spine was not edited. Closed the issue for the prior adversarial shared-contract and fallback omissions after confirming the corresponding rules are now explicit.
+
+### Åpne punkter
+Ingen fra den adversarial gjennomgangen. Separate stack/operations and product-brief reconciliation items remain tracked in `issues.md`.
