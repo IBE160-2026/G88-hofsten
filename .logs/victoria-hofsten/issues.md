@@ -10,3 +10,4 @@
 - [x] 2026-11-19 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — bruk samme scenario-labels i FR-5 som i FR-4; gjeldende 12-timers tabell bruker «Keep planned speed» og «Speed up». (løst 2026-11-19: PRD-labels ensrettet og status satt til approved.)
 - [ ] 2026-11-19 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — brukerbehovet er basert på desk research og er ikke validert; V1 planlegger ikke ekstern validering.
 - [ ] 2026-11-19 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — avklar atferd ved/etter siste kaivindu dersom delay range eller vindusdata senere utvides.
+- [ ] 2026-11-20 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — reconcile architecture fallback gating, exact labels/copy, rule-based response contract, and verification coverage with the approved mock and FR-7.
