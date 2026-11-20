@@ -1,3 +1,4 @@
+- [ ] 2026-11-20 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — reconcile architecture-spine calculation, scenario, explanation/UI, verification, and project caveat omissions documented in `review-prd-reconciliation.md`, including the cost-model gaps in `review-cost-model-reconciliation.md`.
 # Åpne punkter
 
 - [x] 2026-11-18 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — avklar regler for å utlede scenariofart for andre enn den godkjente prøvereisen. (løst 2026-11-19: andre reiser er utenfor V1.)
@@ -10,4 +11,10 @@
 - [x] 2026-11-19 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — bruk samme scenario-labels i FR-5 som i FR-4; gjeldende 12-timers tabell bruker «Keep planned speed» og «Speed up». (løst 2026-11-19: PRD-labels ensrettet og status satt til approved.)
 - [ ] 2026-11-19 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — brukerbehovet er basert på desk research og er ikke validert; V1 planlegger ikke ekstern validering.
 - [ ] 2026-11-19 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — avklar atferd ved/etter siste kaivindu dersom delay range eller vindusdata senere utvides.
-- [ ] 2026-11-20 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — reconcile architecture fallback gating, exact labels/copy, rule-based response contract, and verification coverage with the approved mock and FR-7.
+- [ ] 2026-11-20 [VoyageAI Product Brief Reconciliation](995-2026-11-20-11-03-voyageai-product-brief-reconciliation.md) — avklar om V1 tilbyr flere valgbare prøvereiser eller bare den faste A–B–C-reisen.
+- [ ] 2026-11-20 [VoyageAI Product Brief Reconciliation](995-2026-11-20-11-03-voyageai-product-brief-reconciliation.md) — avklar om 0–12 timer er tilsiktet grense, til tross for 36-timers-eksemplet i briefen.
+- [ ] 2026-11-20 [VoyageAI Product Brief Reconciliation](995-2026-11-20-11-03-voyageai-product-brief-reconciliation.md) — avklar om deterministisk anbefalingspolicy skal overstyre briefens AI-eide forslag.
+- [ ] 2026-11-20 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — reconcile architecture fallback gating, exact labels/copy, rule-based response contract, enforceable validation of AI recommendation/numeric claims, explanation trade-offs/limitations, and verification coverage with the approved mock and FR-6/FR-7/SM-3. See [good-spine review](../../.docs/planning-artifacts/architecture/architecture-VoyageAI-2026-11-20/reviews/review-good-spine-rubric.md).
+- [ ] 2026-11-20 [VoyageAI good-spine review](996-2026-11-20-11-03-voyageai-good-spine-review.md) — align the proposed stack and lockfile wording with the actual scaffold when `pyproject.toml` and `uv.lock` are added.
+- [ ] 2026-11-20 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — reconcile architecture-spine calculation, scenario, explanation/UI, verification, project caveat, shared-contract, sample-ownership, provider-validation, and fallback omissions documented in `review-prd-reconciliation.md` and `review-adversarial-boundaries.md`.
+- [ ] 2026-11-20 [VoyageAI stack and operations review](996-2026-11-20-11-03-voyageai-good-spine-review.md) — triage the findings in `review-stack-and-operations.md` covering project pins/lockfile, local secrets and Flask session-key assumptions, provider deadlines, and fallback presentation/current-delay tests.
