@@ -14,6 +14,10 @@ The stack names Python 3.14 as the minimum and 3.14.10 as the seed interpreter, 
 
 **Resolution:** State the tested/supported Python range separately from the local interpreter pin. If V1 is intended to support only Python 3.14 for now, bound the project requirement accordingly (for example, `>=3.14,<3.15`); otherwise test Python 3.15 and explicitly include it in the supported range.
 
+### Resolution Status — Closed 2026-11-21
+
+The final [architecture spine](../ARCHITECTURE-SPINE.md) now defines V1 support as CPython 3.14.x with project range `>=3.14,<3.15` and seed interpreter 3.14.10. Python 3.15 and later require separate compatibility validation before being declared supported. The finding and its original review verdict above are retained as the historical review record; this note records the subsequent resolution.
+
 ## Rubric Assessment
 
 - **Altitude and paradigm:** Initiative altitude matches the whole VoyageAI V1 scope. Ports-and-adapters modular monolith with a layered core suits the local Flask/Jinja prototype, deterministic domain logic, and optional outbound AI adapter.
