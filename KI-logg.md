@@ -124,3 +124,36 @@ Brukeren godkjente også skillet mellom produktkrav og IBE160-prosessmål, API-f
 KI-loggen ble ikke inkludert i PRD-commiten eller pushet. Denne 19.11-oppføringen er lagt til lokalt etterpå; den venter fortsatt på separat godkjenning før eventuell publisering.
 
 ---
+
+### Dato: 21.11.2026 (arkitekturarbeid 20.–21.11)
+
+**KI-verktøy:** GitHub Copilot i VS Code med BMAD Architecture og uavhengige reviewer-agenter
+
+**Hva prøvde jeg å gjøre?**
+Ferdigstille arkitekturspinen for VoyageAI V1 før implementering. Målet var å kontrollere at valgt modulær monolitt følger den godkjente PRD-en og samtidig gjøre beregninger og anbefalingslogikk testbare uten KI-tjenesten.
+
+**Prompten jeg skrev:**
+> «Jeg velger en modulær monolitt for VoyageAI V1. Det viktigste for meg er enkelhet, testbarhet, vedlikeholdbarhet og å levere en fungerende prototype innen eksamensfristen.»
+>
+> «Arkitekturen må følge den godkjente PRD-en. Beregninger og anbefalinger skal være deterministiske og kunne testes uavhengig av KI-tjenesten. Vurder gjerne om det finnes konkrete krav i PRD-en som taler mot dette valget, før vi dokumenterer beslutningen.»
+
+Jeg valgte BMAD **Coaching path** og architecture spine som eneste leveranse. I oppfølgingsvalgene godkjente jeg Flask, server-rendert Jinja, lokal demo og Python 3.14+; den endelige spinen avgrenser førstestøtten til CPython 3.14.x.
+
+**Hva foreslo KI?**
+KI vurderte kravene i PRD-en opp mot arkitekturvalget og fant ikke krav om separat deployering, API-tjeneste, database, kontoer eller produksjonsdrift. KI anbefalte én deploybar Flask-app med tydelige in-process grenser mellom presentasjon, applikasjonsflyt, domeneberegning, anbefalingspolicy og valgfri KI-adapter.
+
+Uavhengige reviewere fant først mangler i felles resultatkontrakt, eksakt presisjon, vindus-/hastighetsregler, fallback-merking og -ruting, synlige simulated-data- og beslutningsgrenser, provider-validering og testdekning. Product Brief-reviewen pekte også på 36-timers-eksempel og AI-eid anbefaling; dette ble vurdert som eldre tekst som er avgrenset/erstattet av godkjent PRD og brukerens beslutning om deterministisk policy.
+
+**Hva valgte jeg å gjøre?**
+Jeg valgte modulær monolitt, Flask/Jinja og lokal kjøring. Domenelogikk beregner scenariene og velger anbefalingen deterministisk fra uavrundede verdier; KI får bare forklare resultatet. KI kan ikke beregne eller endre tall, velge et annet scenario eller overstyre brukerens beslutningsansvar. Manglende, feilende eller ugyldig KI-svar går til PRD-definert mock eller regelbasert fallback.
+
+Reviewfunnene ble innarbeidet i spinen, inkludert immutable `ComparisonResult`/`ScenarioResult`, exact `100/11`-fart, grense- og avrundingsregler, synlige forklaringsetiketter, provider-validering og testmatrise. Python-støtte ble avgrenset til 3.14.x inntil nyere minorversjoner er testet. Provider, modell og konkrete tidsfrister ble utsatt til adapter-implementering. PRD, Product Brief og applikasjonskode ble ikke endret.
+
+**Hvordan sjekket jeg det?**
+- Kjørte architecture-spinelinteren etter endringene; sluttresultat: 0 funn.
+- Kontrollerte Python 3.14.10, Flask 3.1.3 og uv 0.13.9 mot offisielle kilder; stack-/operations-reviewen fant ingen kompatibilitetsblokkering.
+- Final adversarial review fant ingen gjenværende grensehull. Rubric-funnet om Python 3.15 ble rettet. Kildeavstemming og reviewerfunn er bevart under [architecture reviews](.docs/planning-artifacts/architecture/architecture-VoyageAI-2026-11-20/reviews/).
+- Et siste separat stack-review-kall feilet med 401, så ingen egen `review-final-stack.md` ble laget. Versjoner og fit var allerede verifisert i tidligere review; dette er en begrensning i siste reviewrunde.
+- Det finnes ikke applikasjonskode ennå, så ingen applikasjons- eller beregningstester ble kjørt. Dette var arkitektur- og dokumentkontroll.
+
+---

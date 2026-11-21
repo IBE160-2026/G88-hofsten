@@ -1,4 +1,3 @@
-- [ ] 2026-11-20 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — reconcile architecture-spine calculation, scenario, explanation/UI, verification, and project caveat omissions documented in `review-prd-reconciliation.md`, including the cost-model gaps in `review-cost-model-reconciliation.md`.
 # Åpne punkter
 
 - [x] 2026-11-18 [VoyageAI PRD](997-2026-11-18-14-10-voyageai-prd.md) — avklar regler for å utlede scenariofart for andre enn den godkjente prøvereisen. (løst 2026-11-19: andre reiser er utenfor V1.)
